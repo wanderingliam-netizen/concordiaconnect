@@ -247,3 +247,7 @@ function closeModal(){modalRoot.innerHTML=''}
 document.getElementById('searchBtn').addEventListener('click',()=>{setView('board');setTimeout(()=>document.getElementById('boardSearch')?.focus(),50)});
 window.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 render();
+const CMS_API_URL =
+  'https://script.google.com/macros/s/AKfycbwEqMcD2sI92k9XfijEG1fxkZAe7tVBT39qzN_cmPZtE27ZN2q3q77WSPOQQeWxlXEz/exec';
+render();
+loadCms();
