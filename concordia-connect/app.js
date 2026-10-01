@@ -318,7 +318,7 @@ render();
 const CMS_API_URL =
   'https://script.google.com/macros/s/AKfycbwEqMcD2sI92k9XfijEG1fxkZAe7tVBT39qzN_cmPZtE27ZN2q3q77WSPOQQeWxlXEz/exec';
 render();
-loadCms();
+
 
 Object.assign(window, { setView, render, openCreatePost, openOnboarding, openPostModal, closeModal });
 // Subscribe to new rows added to the 'posts' table
