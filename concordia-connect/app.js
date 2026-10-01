@@ -94,8 +94,12 @@ const modalRoot = document.getElementById('modalRoot');
 const toastRoot = document.getElementById('toastRoot');
 
 function loadState(){
-  try{ const saved=JSON.parse(localStorage.getItem(KEY)); return saved ? {...seeded,...saved} : structuredClone(seeded); }
-  catch(e){ return structuredClone(seeded); }
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY));
+    return saved ? { ...seeded, ...saved } : structuredClone(seeded);
+  } catch(e) {
+    return structuredClone(seeded);
+  }
 }
 function save(){ localStorage.setItem(KEY,JSON.stringify(state)); }
 function asset(key){ return assets[key] || assets.campus; }
