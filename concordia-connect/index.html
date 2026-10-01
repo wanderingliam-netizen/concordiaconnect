@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0e12" />
+  <title>ConcordiaConnect — Real people. Real plans. New friends.</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" data-action="home">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 50 50" fill="none"><path d="M8 8h34l-5 24-12 10L13 32 8 8Z" stroke="currentColor" stroke-width="3"/><path d="M13 13h24l-4 15-8 6-8-6-4-15Z" fill="currentColor" opacity=".9"/></svg>
+        </div>
+        <div><strong>Concordia<span>Connect</span></strong><small>Real people. Real plans. New friends.</small></div>
+      </div>
+
+      <nav class="desktop-nav" aria-label="Primary">
+        <button class="nav-btn active" data-view="home"><span class="nav-ico">⌂</span>Home</button>
+        <button class="nav-btn" data-view="board"><span class="nav-ico">◌</span>Post Board</button>
+        <button class="nav-btn" data-view="finder"><span class="nav-ico">♧</span>Friend Finder</button>
+        <button class="nav-btn" data-view="matches"><span class="nav-ico">♡</span>Matches</button>
+        <button class="nav-btn" data-view="newsletter"><span class="nav-ico">▣</span>Newsletter</button>
+        <button class="nav-btn" data-view="profile"><span class="nav-ico">◉</span>Profile</button>
+      </nav>
+
+      <div class="top-actions">
+        <button class="icon-btn" id="searchBtn" title="Search">⌕</button>
+        <button class="avatar-btn" data-view="profile" id="topAvatar">LS</button>
+      </div>
+    </header>
+
+    <main id="app" class="content"></main>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button data-view="home" class="mobile-nav-btn active"><span>⌂</span><small>Home</small></button>
+      <button data-view="board" class="mobile-nav-btn"><span>◌</span><small>Board</small></button>
+      <button data-view="finder" class="mobile-nav-btn"><span>♧</span><small>Find</small></button>
+      <button data-view="matches" class="mobile-nav-btn"><span>♡</span><small>Matches</small></button>
+      <button data-view="newsletter" class="mobile-nav-btn"><span>▣</span><small>News</small></button>
+      <button data-view="profile" class="mobile-nav-btn"><span>◉</span><small>Me</small></button>
+    </nav>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toast-root" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
