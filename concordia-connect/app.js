@@ -6,7 +6,7 @@ async function testSupabase() {
   console.log("Testing Supabase connection...");
   
   // Checks basic connectivity to your Supabase project
-  const { data, error } = await supabase.from('test').select('*');
+  const { data, error } = await supabase.from('posts').select('*');
 
   if (error) {
     // 404 / 'relation does not exist' means connection WORKED, 
