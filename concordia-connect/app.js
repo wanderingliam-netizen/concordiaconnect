@@ -273,3 +273,19 @@ render();
 loadCms();
 
 Object.assign(window, { setView, render, openCreatePost, openOnboarding, openPostModal, closeModal });
+// Subscribe to new rows added to the 'posts' table
+const channel = supabase
+  .channel('realtime:posts')
+  .on(
+    'postgres_changes',
+    {
+      event: 'INSERT',
+      schema: 'public',
+      table: 'posts',
+    },
+    (payload) => {
+      // payload.new contains the newly inserted row
+      renderPost(payload.new);
+    }
+  )
+  .subscribe();
