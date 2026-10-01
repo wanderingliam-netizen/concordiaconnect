@@ -245,7 +245,55 @@ function openOnboarding(){
 function openCreatePost(){
   modalRoot.innerHTML=`<div class="modal-backdrop"><div class="modal"><div class="modal-head"><h3>Create a post</h3><button class="modal-close" data-close>×</button></div><div class="modal-body"><div class="field"><label>What’s the plan?</label><textarea id="newPostText" placeholder="e.g. Anyone down for coffee near Guy around 3?"></textarea></div><div class="form-row"><div class="field"><label>Category</label><select id="newPostTag"><option>Social</option><option>Study</option><option>Travel</option><option>Other</option></select></div><div class="field"><label>Location</label><input id="newPostLocation" placeholder="SGW Campus / Mile End / Downtown"></div></div><div class="modal-actions"><button class="btn btn-ghost" data-close>Cancel</button><button class="btn btn-primary" id="publishPost">Publish post</button></div></div></div></div>`;
   modalRoot.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeModal));
-  document.getElementById('publishPost').addEventListener('click',()=>{const text=document.getElementById('newPostText').value.trim();if(!text){toast('Add some text first');return}state.posts.unshift({id:Date.now(),user:state.user.name,avatar:'avaLucas',time:'Just now',location:document.getElementById('newPostLocation').value.trim()||'Concordia',tag:document.getElementById('newPostTag').value,text,likes:0,liked:false,comments:[]});save();closeModal();toast('Post published');setView('board')});
+  
+  document.getElementById('publishPost').addEventListener('click', async () => {
+    const text = document.getElementById('newPostText').value.trim();
+    if (!text) {
+      toast('Add some text first');
+      return;
+    }
+
+    const authorName = (state.user && state.user.name) ? state.user.name : 'Liam';
+    const tag = document.getElementById('newPostTag').value;
+    const location = document.getElementById('newPostLocation').value.trim() || 'Concordia';
+
+    // 1. Insert into Supabase
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([
+        {
+          author: authorName,
+          content: text
+        }
+      ])
+      .select();
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      toast('Failed to save to database');
+      return;
+    }
+
+    // 2. Add to local state & UI
+    const createdId = data && data[0] ? data[0].id : Date.now();
+    state.posts.unshift({
+      id: createdId,
+      user: authorName,
+      avatar: 'avaLucas',
+      time: 'Just now',
+      location: location,
+      tag: tag,
+      text: text,
+      likes: 0,
+      liked: false,
+      comments: []
+    });
+
+    save();
+    closeModal();
+    toast('Post published');
+    setView('board');
+  });
 }
 function openPostModal(id){
   const p=state.posts.find(x=>x.id==id); if(!p)return;
