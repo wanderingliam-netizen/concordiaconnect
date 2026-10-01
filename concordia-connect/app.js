@@ -1,3 +1,7 @@
+const SUPABASE_URL = 'https://knadfjpgxvvwmrehvzle.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_CPEbD733DRH8vUnyICTYTg_rYkSMoKq';
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const KEY = 'concordia-connect-demo-v1';
 const assets = {
   campus: 'assets/campus.svg',
