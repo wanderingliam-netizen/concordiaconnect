@@ -284,8 +284,25 @@ const channel = supabase
       table: 'posts',
     },
     (payload) => {
-      // payload.new contains the newly inserted row
-      renderPost(payload.new);
+      // payload.new comes from Supabase
+      const newPost = {
+        id: payload.new.id,
+        user: payload.new.author || 'Anonymous',
+        avatar: 'avaLucas',
+        time: 'Just now',
+        location: payload.new.location || 'Concordia',
+        tag: payload.new.tag || 'Social',
+        text: payload.new.content,
+        likes: 0,
+        liked: false,
+        comments: []
+      };
+
+      // Avoid duplicating if the author already added it locally
+      if (!state.posts.some(p => p.id === newPost.id)) {
+        state.posts.unshift(newPost);
+        render();
+      }
     }
   )
   .subscribe();
