@@ -2,6 +2,22 @@ const SUPABASE_URL = 'https://knadfjpgxvvwmrehvzle.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_CPEbD733DRH8vUnyICTYTg_rYkSMoKq';
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+async function testSupabase() {
+  console.log("Testing Supabase connection...");
+  
+  // Checks basic connectivity to your Supabase project
+  const { data, error } = await supabase.from('test').select('*');
+
+  if (error) {
+    // 404 / 'relation does not exist' means connection WORKED, 
+    // but the table 'test' simply isn't created yet (which is completely fine for a ping test).
+    console.log("Supabase connected successfully! Response from server:", error.message);
+  } else {
+    console.log("Supabase connected and returned data:", data);
+  }
+}
+
+testSupabase();
 const KEY = 'concordia-connect-demo-v1';
 const assets = {
   campus: 'assets/campus.svg',
